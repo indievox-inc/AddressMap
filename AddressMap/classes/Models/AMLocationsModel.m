@@ -8,7 +8,6 @@
 
 #import "AMLocationsModel.h"
 #import "NSString+Encode.h"
-#import "JSONKit.h"
 #import "AMLocationSpot.h"
 
 @implementation AMLocationsModel
@@ -60,9 +59,11 @@
 
 - (void)asyncSuccess:(id)object {
   ASIHTTPRequest *request = (ASIHTTPRequest*)object;
-  NSString *response = [request responseString];
-  NSDictionary *responseDictionary = [response objectFromJSONString];
-
+  NSError *jsonError;
+  NSData *responseData = [request responseData];
+  NSDictionary *responseDictionary = [NSJSONSerialization JSONObjectWithData:responseData
+                                                                     options:NSJSONReadingMutableContainers
+                                                                       error:&jsonError];
   NSArray *results = [responseDictionary objectForKey:@"results"];
   for (NSDictionary *eachResult in results) {
     AMLocationSpot *locationSpot = [[AMLocationSpot alloc] init];
