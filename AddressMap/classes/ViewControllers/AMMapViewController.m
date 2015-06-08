@@ -47,7 +47,7 @@
   _locationModel.delegate = self;
   [_locationModel load];
 
-  _mapView = [[MKMapView alloc] init];
+  _mapView = [[MKMapView alloc] initWithFrame:self.view.frame];
   _mapView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
   [self.view addSubview:_mapView];
 }
@@ -56,11 +56,6 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
   
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-  [super viewWillAppear:animated];
-  self.mapView.frame = self.view.frame;
 }
 
 - (void)viewDidUnload {
