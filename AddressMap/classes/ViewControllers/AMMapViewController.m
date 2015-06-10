@@ -22,15 +22,13 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
-    _address = [[NSString alloc] init];
   }
   return self;
 }
 
 - (id)initWithAddress:(NSString *)address {
   if (self = [self initWithNibName:nil bundle:nil]) {
-    self.address = address;
+    _address = [address copy];
     self.title = self.address;
   }
   return self;
@@ -38,6 +36,8 @@
 
 - (void)dealloc {
   [_address release];
+  [_locationModel release];
+  [_mapView release];
   [super dealloc];
 }
 
@@ -56,13 +56,6 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
   
-}
-
-- (void)viewDidUnload {
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  [_locationModel release];
-  [_mapView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

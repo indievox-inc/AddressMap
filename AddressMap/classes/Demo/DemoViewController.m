@@ -27,6 +27,7 @@
 }
 
 - (void)dealloc {
+  [_addressView release];
   [super dealloc];
 }
 
@@ -55,12 +56,6 @@
   [super viewDidLoad];
   // Do any additional setup after loading the view, typically from a nib.
     
-}
-
-- (void)viewDidUnload {
-  [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  [_addressView release];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
